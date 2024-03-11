@@ -15,6 +15,14 @@ export interface IResponseCreateCategory extends IResponse {
   message: string;
 }
 
+export interface IUpdateCategory {
+  id: number;
+  name: string;
+}
+
+export interface IResponseUpdateCategory extends IResponse {
+  message:string
+}
 export interface IDeletecategory{
   id: number
 } 

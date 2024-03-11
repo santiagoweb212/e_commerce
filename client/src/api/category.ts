@@ -5,6 +5,8 @@ import {
   IResponseCategory,
   IResponseCreateCategory,
   IResponseDeleteCategory,
+  IResponseUpdateCategory,
+  IUpdateCategory,
   IcreateCategory,
 } from "../types/category.type";
 
@@ -23,13 +25,20 @@ const createCategory = async (
   return response;
 };
 
-const deleteCategory = async ({
-  id,
-}: IDeletecategory): Promise<IResponseDeleteCategory> => {
+const updateCategory = async (data: IUpdateCategory) => {
+  const { data: response }: AxiosResponse<IResponseUpdateCategory> =
+    await api.put(`category/update-category/${data.id}`, {
+      name: data.name,
+    });
+  return response;
+};
+const deleteCategoryById = async (
+  id: IDeletecategory["id"]
+): Promise<IResponseDeleteCategory> => {
   const { data }: AxiosResponse<IResponseDeleteCategory> = await api.delete(
     `category/delete-category/${id}`
   );
   return data;
 };
 
-export { getAllCategory, createCategory, deleteCategory };
+export { getAllCategory, createCategory, updateCategory, deleteCategoryById };

@@ -48,11 +48,11 @@ export class categoryService {
 
   static async deleteCategory(category: IDeleteCategory) {
     // Logic to delete a category
-    await prisma.category.delete({
+    const deletedCategory = await prisma.category.delete({
       where: { id: category.id },
     });
     return {
-      message: "category deleted",
+      message: `category ${deletedCategory.name} deleted`,
     };
   }
 }

@@ -1,6 +1,10 @@
+import { useMutation } from "@tanstack/react-query";
 import { ICategory } from "../../../../types/category.type";
 import { formatDate } from "../../../../utils/fomatDate";
 import ButtonsActionTable from "./ButtonsActionTable";
+import { toast,ToastContainer } from "react-toastify";
+import { deleteCategoryById } from "../../../../api/category";
+import { queryClient } from "../../../../main";
 interface ITableCategoryProps {
   data: ICategory[];
 }
@@ -14,6 +18,14 @@ interface ITableRow extends ICategory {
   cell?: any;
 }
 const TableCategory = ({ data }: ITableCategoryProps) => {
+  const notify = (message: string) => toast(message);
+  const mutation =  useMutation({
+    mutationFn: async (id: number) => await deleteCategoryById(id),
+    onSuccess: (data) => {
+      notify(data.message);
+      queryClient.refetchQueries({ queryKey: ["categories"] });
+    },
+  })
   const columns: ITableColumns[] = [
     {
       accessorKey: "id",
@@ -27,16 +39,21 @@ const TableCategory = ({ data }: ITableCategoryProps) => {
       accessorKey: "createAt",
       header: "Created At",
       cell: (cell: ITableRow) => {
+      
         return <span>{formatDate(cell.createAt)}</span>;
       },
     },
     {
       accessorKey: "action",
       header: "Action",
+      cell: (cell: ITableRow) => {
+        
+       return <ButtonsActionTable mutation={mutation} cell={cell}/>
+      }
     },
   ];
   return (
-    
+    <>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className=" sticky top-32 bg-bg before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-gray-700 text-white text-left text-xs ">
           <tr className="">
@@ -72,11 +89,7 @@ const TableCategory = ({ data }: ITableCategoryProps) => {
                         col.accessorKey === "action" && "text-center"
                       } text-left py-4 `}
                     >
-                      {col.accessorKey === "action" ? (
-                        
-                          <ButtonsActionTable />
-                        
-                      ) : "cell" in col ? (
+                      { "cell" in col ? (
                         col.cell(row)
                       ) : (
                         row[col.accessorKey as keyof ITableRow]
@@ -87,7 +100,8 @@ const TableCategory = ({ data }: ITableCategoryProps) => {
             ))}
         </tbody>
       </table>
-    
+      <ToastContainer />
+      </>
   );
 };
 export default TableCategory;

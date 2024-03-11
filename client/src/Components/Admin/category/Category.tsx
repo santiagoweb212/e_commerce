@@ -10,6 +10,7 @@ import FormCreateCategory from "./components/FormCreateCategory";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { filterCategoriesByName } from "../../../utils/filterCategories";
 import { useOpenFormStoreCategory } from "./store/useOpenForm.store";
+import FormUpdateCategory from "./components/FormUpdateCategory";
 
 const Category = () => {
   const { register, watch } = useForm();
@@ -78,7 +79,13 @@ const Category = () => {
         <div className="fixed inset-0   flex justify-center items-center left-0 top-0 z-50 transition-opacity duration-300 bg-gray-200/75 dark:bg-gray-800/75">
           <FormCreateCategory />
         </div>
-      )}
+      )}{
+        openForm.edit && (
+          <div className="fixed inset-0   flex justify-center items-center left-0 top-0 z-50 transition-opacity duration-300 bg-gray-200/75 dark:bg-gray-800/75">
+            <FormUpdateCategory/>
+          </div>
+        )
+      }
     </div>
   );
 };

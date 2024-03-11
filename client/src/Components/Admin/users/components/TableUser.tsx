@@ -85,6 +85,7 @@ const TableUser = ({ data }: TableUserProps) => {
       accessorKey: "action",
       header: "ACTION",
       cell: ({ cell }: any) => (
+        console.log("cell------>", cell),
         <ButtonsActionTable cell={cell} mutation={mutation} />
       ),
     },

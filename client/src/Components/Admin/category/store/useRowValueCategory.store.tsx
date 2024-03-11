@@ -6,7 +6,7 @@ interface IRowValue {
     };
     setRowValue: (rowValue: IRowValue["rowValue"]) => void;
 }
-export const useRowValueStore = create<IRowValue>((set) => ({
+export const useRowValueCategoryStore = create<IRowValue>((set) => ({
     rowValue: {
         id: 0,
         name: "",
