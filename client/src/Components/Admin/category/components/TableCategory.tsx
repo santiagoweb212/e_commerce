@@ -53,9 +53,11 @@ const TableCategory = ({ data }: ITableCategoryProps) => {
     },
   ];
   return (
+
     <>
+
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className=" sticky top-32 bg-bg before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-gray-700 text-white text-left text-xs ">
+        <thead className="  text-xs border-b border-gray-700 text-gray-700 uppercase dark:text-gray-400">
           <tr className="">
             {columns &&
               columns.map((col) => (
@@ -100,8 +102,10 @@ const TableCategory = ({ data }: ITableCategoryProps) => {
             ))}
         </tbody>
       </table>
+
       <ToastContainer />
       </>
+
   );
 };
 export default TableCategory;
