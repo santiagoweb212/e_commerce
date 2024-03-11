@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client'
-import bcryp from 'bcrypt'
-const prisma = new PrismaClient()
+import { PrismaClient } from "@prisma/client";
+import bcryp from "bcrypt";
+const prisma = new PrismaClient();
 
 const usuarios=[
     {
@@ -258,34 +258,38 @@ const usuarios=[
       "email": "jenniferhayes@example.com",
       "password": "mypassword"
     }
+    {
+      "username":"PedroMolina",
+      "email" : "pedro.molinanoa@gmail.com",
+        "password" : "mypassword"} 
   ]
 const categories = [
   {
-    "name": "Laptops"
+    name: "Laptops",
   },
   {
-    "name": "Desktops"
+    name: "Desktops",
   },
   {
-    "name": "Monitors"
+    name: "Monitors",
   },
   {
-    "name": "Keyboards"
+    name: "Keyboards",
   },
   {
-    "name": "Mice"
+    name: "Mice",
   },
   {
-    "name": "Printers"
+    name: "Printers",
   },
   {
-    "name": "Scanners"
+    name: "Scanners",
   },
   {
-    "name": "Routers"
+    name: "Routers",
   },
   {
-    "name": "Software"
+    name: "Software",
   },
   {
     "name": "Accessories"
@@ -306,10 +310,10 @@ async function main() {
 }
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
